@@ -4,33 +4,33 @@
 
 Strings in Elixir are delimited by double quotes, and they are encoded in UTF-8:
 
-```elixir
+``` elixir
 "Hi!"
 ```
 
 Strings can be concatenated using the `<>/2` operator:
 
-```elixir
+``` elixir
 "Welcome to" <> " " <> "New York"
 # => "Welcome to New York"
 ```
 
 Strings in Elixir support interpolation using the `#{}` syntax:
 
-```elixir
+``` elixir
 "6 * 7 = #{6 * 7}"
 # => "6 * 7 = 42"
 ```
 
 To put a newline character in a string, use the `\n` escape code:
 
-```elixir
+``` elixir
 "1\n2\n3\n"
 ```
 
 To comfortably work with texts with a lot of newlines, use the triple-double-quote heredoc syntax instead:
 
-```elixir
+``` elixir
 """
 1
 2
@@ -44,7 +44,7 @@ Elixir provides many functions for working with strings in the `String` module.
 
 The `|>` operator is called the pipe operator. It can be used to chain function calls together in such a way that the value returned by the previous function call is passed as the first argument to the next function call.
 
-```elixir
+``` elixir
 "hello"
 |> String.upcase()
 |> Kernel.<>("?!")

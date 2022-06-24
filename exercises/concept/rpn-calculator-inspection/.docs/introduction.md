@@ -2,9 +2,9 @@
 
 ## Links
 
-Elixir [processes][exercism-processes] are isolated and don't share anything by default. When an unlinked child process crashes, its parent process is not affected.
+Elixir [processes](https://exercism.org/tracks/elixir/concepts/processes) are isolated and don't share anything by default. When an unlinked child process crashes, its parent process is not affected.
 
-This behavior can be changed by _linking_ processes to one another. If two processes are linked, a failure in one process will be propagated to the other process. Links are **bidirectional**.
+This behavior can be changed by *linking* processes to one another. If two processes are linked, a failure in one process will be propagated to the other process. Links are **bidirectional**.
 
 Processes can be spawned already linked to the calling process using `spawn_link/1` which is an atomic operation, or they can be linked later with `Process.link/1`.
 
@@ -12,15 +12,15 @@ Linking processes can be useful when doing parallelized work when each chunk of 
 
 ### Trapping exits
 
-Linking can also be used for _supervising_ processes. If a process _traps exits_, it will not crash when a process to which it's linked crashes. It will instead receive a message about the crash. This allows it to deal with the crash gracefully, for example by restarting the crashed process.
+Linking can also be used for *supervising* processes. If a process *traps exits*, it will not crash when a process to which it's linked crashes. It will instead receive a message about the crash. This allows it to deal with the crash gracefully, for example by restarting the crashed process.
 
-A process can be configured to trap exits by calling `Process.flag(:trap_exit, true)`. Note that `Process.flag/2` returns the _old_ value of the flag, not the new one.
+A process can be configured to trap exits by calling `Process.flag(:trap_exit, true)`. Note that `Process.flag/2` returns the *old* value of the flag, not the new one.
 
 The message that will be sent to the process in case a linked process crashes will match the pattern `{:EXIT, from, reason}`, where `from` is a PID. If `reason` is anything other than the atom `:normal`, that means that the process crashed or was forcefully killed.
 
 ## Tasks
 
-Tasks are [processes][exercism-processes] meant to execute one specific operation.
+Tasks are [processes](https://exercism.org/tracks/elixir/concepts/processes) meant to execute one specific operation.
 They usually don't communicate with other processes, but they can return a result to the process that started the task.
 
 Tasks are commonly used to parallelize work.
@@ -38,5 +38,3 @@ Any task started with `Task.async/1` should be awaited because it will send a me
 ### `start`/`start_link`
 
 If you want to start a task for side-effects only, use `Task.start/1` or `Task.start_link/1`. `Task.start/1` will start a task that is not linked to the calling process, and `Task.start_link/1` will start a task that is linked to the calling process. Both functions return a `{:ok, pid}` tuple.
-
-[exercism-processes]: https://exercism.org/tracks/elixir/concepts/processes

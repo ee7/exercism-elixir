@@ -6,7 +6,7 @@ Protocols are a mechanism to achieve polymorphism in Elixir when you want behavi
 
 Protocols are defined using `defprotocol` and contain one or more function headers.
 
-```elixir
+``` elixir
 defprotocol Reversible do
   def reverse(term)
 end
@@ -14,7 +14,7 @@ end
 
 Protocols can be implemented using `defimpl`.
 
-```elixir
+``` elixir
 defimpl Reversible, for: List do
   def reverse(term) do
     Enum.reverse(term)

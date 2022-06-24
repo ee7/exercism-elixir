@@ -4,29 +4,29 @@
 
 Regular expressions (regex) are a powerful tool for working with strings in Elixir. Regular expressions in Elixir follow the **PCRE** specification (**P**erl **C**ompatible **R**egular **E**xpressions). String patterns representing the regular expression's meaning are first compiled then used for matching all or part of a string.
 
-In Elixir, the most common way to create regular expressions is using the `~r` sigil. Sigils provide _syntactic sugar_ shortcuts for common tasks in Elixir. To match a _string literal_, we can use the string itself as a pattern following the sigil.
+In Elixir, the most common way to create regular expressions is using the `~r` sigil. Sigils provide *syntactic sugar* shortcuts for common tasks in Elixir. To match a *string literal*, we can use the string itself as a pattern following the sigil.
 
-```elixir
+``` elixir
 ~r/test/
 ```
 
 The `=~/2` operator is useful to perform a regex match on a string to return a `boolean` result.
 
-```elixir
+``` elixir
 "this is a test" =~ ~r/test/
 # => true
 ```
 
 Two notes about using sigils:
 
-- many different delimiters may be used depending on your requirements rather than `/`
-- string patterns are already _escaped_, when writing the pattern as a string not using a regex, you will have to _escape_ backslashes (`\`)
+  - many different delimiters may be used depending on your requirements rather than `/`
+  - string patterns are already *escaped*, when writing the pattern as a string not using a regex, you will have to *escape* backslashes (`\`)
 
 ### Character classes
 
-Matching a range of characters using square brackets `[]` defines a _character class_. This will match any one character to the characters in the class. You can also specify a range of characters like `a-z`, as long as the start and end represent a contiguous range of code points.
+Matching a range of characters using square brackets `[]` defines a *character class*. This will match any one character to the characters in the class. You can also specify a range of characters like `a-z`, as long as the start and end represent a contiguous range of code points.
 
-```elixir
+``` elixir
 regex = ~r/[a-z][ADKZ][0-9][!?]/
 "jZ5!" =~ regex
 # => true
@@ -34,19 +34,19 @@ regex = ~r/[a-z][ADKZ][0-9][!?]/
 # => false
 ```
 
-_Shorthand character classes_ make the pattern more concise. For example:
+*Shorthand character classes* make the pattern more concise. For example:
 
-- `\d` short for `[0-9]` (any digit)
-- `\w` short for `[A-Za-z0-9_]` (any 'word' character)
-- `\s` short for `[ \t\r\n\f]` (any whitespace character)
+  - `\d` short for `[0-9]` (any digit)
+  - `\w` short for `[A-Za-z0-9_]` (any 'word' character)
+  - `\s` short for `[ \t\r\n\f]` (any whitespace character)
 
-When a _shorthand character class_ is used outside of a sigil, it must be escaped: `"\\d"`
+When a *shorthand character class* is used outside of a sigil, it must be escaped: `"\\d"`
 
 ### Alternations
 
-_Alternations_ use `|` as a special character to denote matching one _or_ another
+*Alternations* use `|` as a special character to denote matching one *or* another
 
-```elixir
+``` elixir
 regex = ~r/cat|bat/
 "bat" =~ regex
 # => true
@@ -56,19 +56,19 @@ regex = ~r/cat|bat/
 
 ### Quantifiers
 
-_Quantifiers_ allow for a repeating pattern in the regex. They affect the group preceding the quantifier.
+*Quantifiers* allow for a repeating pattern in the regex. They affect the group preceding the quantifier.
 
-- `{N, M}` where `N` is the minimum number of repetitions, and `M` is the maximum
-- `{N,}` match `N` or more repetitions
-  - `{0,}` may also be written as `*`: match zero-or-more repetitions
-  - `{1,}` may also be written as `+`: match one-or-more repetitions
-- `{,N}` match up to `N` repetitions
+  - `{N, M}` where `N` is the minimum number of repetitions, and `M` is the maximum
+  - `{N,}` match `N` or more repetitions
+      - `{0,}` may also be written as `*`: match zero-or-more repetitions
+      - `{1,}` may also be written as `+`: match one-or-more repetitions
+  - `{,N}` match up to `N` repetitions
 
 ### Groups
 
-Round brackets `()` are used to denote _groups_ and _captures_. The group may also be _captured_ in some instances to be returned for use. In Elixir, these may be named or un-named. Captures are named by appending `?<name>` after the opening parenthesis. Groups function as a single unit, like when followed by _quantifiers_.
+Round brackets `()` are used to denote *groups* and *captures*. The group may also be *captured* in some instances to be returned for use. In Elixir, these may be named or un-named. Captures are named by appending `?<name>` after the opening parenthesis. Groups function as a single unit, like when followed by *quantifiers*.
 
-```elixir
+``` elixir
 regex = ~r/(h)at/
 Regex.replace(regex, "hat", "\\1op")
 # => "hop"
@@ -80,16 +80,16 @@ Regex.scan(regex, "blueberry", capture: :all_names)
 
 ### Anchors
 
-_Anchors_ are used to tie the regular expression to the beginning or end of the string to be matched:
+*Anchors* are used to tie the regular expression to the beginning or end of the string to be matched:
 
-- `^` anchors to the beginning of the string
-- `$` anchors to the end of the string
+  - `^` anchors to the beginning of the string
+  - `$` anchors to the end of the string
 
 ### Interpolation
 
 Because the `~r` is a shortcut for `"pattern" |> Regex.escape() |> Regex.compile!()`, you may also use string interpolation to dynamically build a regular expression pattern:
 
-```elixir
+``` elixir
 anchor = "$"
 regex = ~r/end of the line#{anchor}/
 "end of the line?" =~ regex

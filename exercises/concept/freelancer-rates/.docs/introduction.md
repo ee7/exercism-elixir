@@ -6,7 +6,7 @@ There are two different kinds of numbers in Elixir - integers and floats.
 
 Integers are whole numbers.
 
-```elixir
+``` elixir
 integer = 3
 # => 3
 ```
@@ -15,20 +15,20 @@ integer = 3
 
 Floats are numbers with one or more digits behind the decimal separator. They use the 64-bit double precision floating-point format.
 
-```elixir
+``` elixir
 float = 3.45
 # => 3.45
 ```
 
 ### Working with numbers
 
-In the [`Integer`][integer-functions] and [`Float`][float-functions] modules you can find some useful functions for working with those types. Basic arithmetic operators are defined in the [`Kernel`][kernel-arithmetic-operators] module.
+In the [`Integer`](https://hexdocs.pm/elixir/Integer.html#functions) and [`Float`](https://hexdocs.pm/elixir/Float.html#functions) modules you can find some useful functions for working with those types. Basic arithmetic operators are defined in the [`Kernel`](https://hexdocs.pm/elixir/Kernel.html#*/2) module.
 
 ### Conversion
 
 Integers and floats can be mixed together in a single arithmetic expression. Using a float in an expression ensures the result will be a float too.
 
-```elixir
+``` elixir
 2 * 3
 # => 6
 
@@ -38,14 +38,9 @@ Integers and floats can be mixed together in a single arithmetic expression. Usi
 
 However, when doing division, the result will always be a float, even if only integers are used.
 
-```elixir
+``` elixir
 6 / 2
 # => 3.0
 ```
 
-To convert a float to an integer, you can discard the decimal part with [`trunc/1`][trunc-1].
-
-[integer-functions]: https://hexdocs.pm/elixir/Integer.html#functions
-[float-functions]: https://hexdocs.pm/elixir/Float.html#functions
-[kernel-arithmetic-operators]: https://hexdocs.pm/elixir/Kernel.html#*/2
-[trunc-1]: https://hexdocs.pm/elixir/Kernel.html#trunc/1
+To convert a float to an integer, you can discard the decimal part with [`trunc/1`](https://hexdocs.pm/elixir/Kernel.html#trunc/1).

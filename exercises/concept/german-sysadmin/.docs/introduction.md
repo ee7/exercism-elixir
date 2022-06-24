@@ -4,20 +4,20 @@
 
 Charlists are created using single quotes.
 
-```elixir
+``` elixir
 'hello'
 ```
 
 Although they look similar to strings, the two data types are quite different from one another. A charlist is a list of integers. The integers represent the Unicode values of a given character — also known as code points.
 
-```elixir
+``` elixir
 [65, 66, 67]
 # => 'ABC'
 ```
 
 You can prepend a character with `?` to get its code point.
 
-```elixir
+``` elixir
 ?A
 # => 65
 
@@ -27,7 +27,7 @@ You can prepend a character with `?` to get its code point.
 
 Because charlist are lists, you can work with them just like with any other list - using recursion and pattern matching.
 
-```elixir
+``` elixir
 [first_letter | _] = 'cat'
 first_letter
 # => 99
@@ -35,7 +35,7 @@ first_letter
 
 You can concatenate two lists using `++`.
 
-```elixir
+``` elixir
 'hi' ++ '!'
 # => 'hi!'
 ```
@@ -46,7 +46,7 @@ The longer the first list is, the slower the concatenation, so avoid repeatedly 
 
 `case` is a control flow structure that allows us to compare a given value against many patterns. Clauses in a `case` expression are evaluated from top to bottom, until a match is found.
 
-```elixir
+``` elixir
 age = 15
 
 case age do

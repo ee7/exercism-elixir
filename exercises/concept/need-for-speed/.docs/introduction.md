@@ -8,7 +8,7 @@ The special form `alias` allows you to shorten or change the name by which you r
 
 Usually aliases are added at the beginning of the module definition.
 
-```elixir
+``` elixir
 defmodule Square do
   alias Integer, as: I
 
@@ -24,7 +24,7 @@ Importing a whole outside module might create conflicts with existing local func
 
 Usually imports are added at the beginning of the module definition.
 
-```elixir
+``` elixir
 defmodule Square do
   import Integer, only: [pow: 2]
 

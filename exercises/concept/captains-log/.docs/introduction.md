@@ -16,18 +16,16 @@ Erlang's standard library is available for use in our Elixir code without any ex
 
 Erlang functions can be called in the same way we call Elixir functions, with one small difference. Erlang module names are `snake_case` atoms. For example, to call the Erlang `pi/0` function from the `math` module, one would write:
 
-```elixir
+``` elixir
 :math.pi()
 # => 3.141592653589793
 ```
 
 The most commonly used Erlang functions that do not have an Elixir equivalent are:
 
-- `:timer.sleep/1` which suspends a process for the given amount of milliseconds.
-- `:rand.uniform/0` which generates a random float `x`, where `0.0 <= x < 1.0`.
-- `:io_lib.format/2` which provides C-style string formatting (using control sequences). Using this function, we could for example print an integer in any base between 2 and 36 or format a float with desired precision. Note that this function, like many Erlang functions, returns a charlist.
-- The `math` module that provides mathematical functions such as `sin/1`, `cos/1`, `log2/1`, `log10/1`, `pow/2`, and more.
+  - `:timer.sleep/1` which suspends a process for the given amount of milliseconds.
+  - `:rand.uniform/0` which generates a random float `x`, where `0.0 <= x < 1.0`.
+  - `:io_lib.format/2` which provides C-style string formatting (using control sequences). Using this function, we could for example print an integer in any base between 2 and 36 or format a float with desired precision. Note that this function, like many Erlang functions, returns a charlist.
+  - The `math` module that provides mathematical functions such as `sin/1`, `cos/1`, `log2/1`, `log10/1`, `pow/2`, and more.
 
-To discover Erlang's standard library, explore the [STDLIB Reference Manual][erl-stdlib-ref].
-
-[erl-stdlib-ref]: http://www.erlang.org/doc/apps/stdlib/index.html
+To discover Erlang's standard library, explore the [STDLIB Reference Manual](http://www.erlang.org/doc/apps/stdlib/index.html).

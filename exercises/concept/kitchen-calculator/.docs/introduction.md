@@ -6,7 +6,7 @@ In Elixir, a tuple is a data structure which organizes data, holding a fixed num
 
 In practice, tuples are created in Elixir using curly braces. Elements in a tuple can be individually accessed using the `elem/2` function using 0-based indexing:
 
-```elixir
+``` elixir
 empty_tuple = {}
 one_element_tuple = {1}
 multiple_element_tuple = {1, :a, "hello"}
@@ -19,7 +19,7 @@ elem(multiple_element_tuple, 2)
 
 Tuples are often used in practice to represent grouped information.
 
-```elixir
+``` elixir
 Float.ratio(0.25)
 # => {1, 4} indicating the numerator and denominator of the fraction ¼
 ```
@@ -28,7 +28,7 @@ Float.ratio(0.25)
 
 The use of pattern matching is dominant in assertive, idiomatic Elixir code. You might recall that `=/2` is described as a match operator rather than as an assignment operator. When using the match operator, if the pattern on the left matches the right, any variables on the left are bound, and the value of the right side is returned. A `MatchError` is raised if there is no match.
 
-```elixir
+``` elixir
 2 = 2
 # => 2
 # Literals can be matched if they are the same
@@ -49,7 +49,7 @@ In the last example if we don't need a variable in a pattern match, we can disca
 
 Pattern matching is also a useful tool when creating multiple function clauses. Pattern matching can be used on the functions' arguments which then determines which function clause to invoke -- starting from the top of the file down until the first match. Variables may be bound in a function head and used in the function body.
 
-```elixir
+``` elixir
 defmodule Example do
   def named_function(:a = variable_a) do
     {variable_a, 1}

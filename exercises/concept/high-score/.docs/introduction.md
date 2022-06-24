@@ -10,7 +10,7 @@ Keys and values can be of any data type, but if the key is an atom we can use a 
 
 An empty map is simply declared with `%{}`. If we want to add items to a map literal, we can use two forms:
 
-```elixir
+``` elixir
 # If the key is an atom:
 %{atom_key: 1}
 
@@ -25,13 +25,13 @@ While there is no canonical format, choose a consistent way to represent the key
 
 ### Map module functions
 
-Elixir provides many functions for working with maps in the _Map module_. Some _Map module_ functions require an _anonymous_ function to be passed into the function to assist with the map transformation.
+Elixir provides many functions for working with maps in the *Map module*. Some *Map module* functions require an *anonymous* function to be passed into the function to assist with the map transformation.
 
 ## Module Attributes As Constants
 
 In Elixir, we can define module attributes which can be used as constants in our functions.
 
-```elixir
+``` elixir
 defmodule Example do
 
   # Defines the attribute as the value 1

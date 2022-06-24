@@ -4,14 +4,14 @@
 
 Elixir represents true and false values with the boolean type. There are only two values: `true` and `false`. These values can be bound to a variable:
 
-```elixir
+``` elixir
 true_variable = true
 false_variable = false
 ```
 
 We can evaluate strict boolean expressions using the `and/2`, `or/2`, and `not/1` operators.
 
-```elixir
+``` elixir
 true_variable = true and true
 false_variable = true and false
 
@@ -24,7 +24,7 @@ false_variable = not true
 
 When writing a function that returns a boolean value, it is idiomatic to end the function name with a `?`.
 
-```elixir
+``` elixir
 def either_true?(a, b) do
   a or b
 end

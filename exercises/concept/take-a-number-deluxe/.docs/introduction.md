@@ -2,17 +2,17 @@
 
 ## GenServer
 
-`GenServer` (generic server) is a [behaviour][concept-behaviours] that abstracts common client-server interactions between Elixir processes.
+`GenServer` (generic server) is a [behaviour](https://exercism.org/tracks/elixir/concepts/behaviours) that abstracts common client-server interactions between Elixir processes.
 
-Remember the receive loop from when we learned about [processes][concept-processes]? The `GenServer` behaviour provides abstractions for implementing such loops, and for exchanging messages with a process that runs such a loop. It makes it easier to keep state and execute asynchronous code.
+Remember the receive loop from when we learned about [processes](https://exercism.org/tracks/elixir/concepts/processes)? The `GenServer` behaviour provides abstractions for implementing such loops, and for exchanging messages with a process that runs such a loop. It makes it easier to keep state and execute asynchronous code.
 
-~~~~exercism/note
+``` exercism/note
 Be warned that the name `GenServer` is loaded. It is also used to describe a _module_ that _uses_ the `GenServer` behaviour, as well as a _process_ that was started from a module that _uses_ the `GenServer` behaviour.
-~~~~
+```
 
-The `GenServer` behaviour defines one required callback, `init/1`, and a few interesting optional callbacks: `handle_call/3`, `handle_cast/2`, and `handle_info/3`. The _clients_ using a `GenServer` aren't supposed to call those callbacks directly. Instead, the `GenServer` module provides functions that clients can use to communicate with a `GenServer` process.
+The `GenServer` behaviour defines one required callback, `init/1`, and a few interesting optional callbacks: `handle_call/3`, `handle_cast/2`, and `handle_info/3`. The *clients* using a `GenServer` aren't supposed to call those callbacks directly. Instead, the `GenServer` module provides functions that clients can use to communicate with a `GenServer` process.
 
-Often, a single module defines both a _client API_, a set of functions that other parts of your Elixir app can call to communicate with this `GenServer` process, and _server callback implementations_, which contain this `GenServer`'s logic.
+Often, a single module defines both a *client API*, a set of functions that other parts of your Elixir app can call to communicate with this `GenServer` process, and *server callback implementations*, which contain this `GenServer`'s logic.
 
 Let's take a look at a simple example of a `GenServer` first, and then learn what each callback means.
 
@@ -20,7 +20,7 @@ Let's take a look at a simple example of a `GenServer` first, and then learn wha
 
 This is an example server that can respond to the repetitive inquisitions of annoying passengers during a long road trip, more exactly the question: "are we there yet?". It keeps track of how many times this question has been asked, returning increasingly more annoyed responses.
 
-```elixir
+``` elixir
 defmodule AnnoyingPassengerAutoresponder do
   use GenServer
   # Client API
@@ -63,18 +63,20 @@ end
 
 #### `init/1`
 
-A server can be started by calling `GenServer.start/3` or `GenServer.start_link/3`. We learned about the difference between those functions in the [links concept][concept-links].
+A server can be started by calling `GenServer.start/3` or `GenServer.start_link/3`. We learned about the difference between those functions in the [links concept](https://exercism.org/tracks/elixir/concepts/links).
 
 Those two functions:
-- Accept a module implementing the `GenServer` behaviour as the first argument.
-- Accept anything as the second argument called `init_arg`. As the name suggest, this argument gets passed to the `init/1` callback.
-- Accept an optional third argument with advanced options for running the process that we wont' cover now.
+
+  - Accept a module implementing the `GenServer` behaviour as the first argument.
+  - Accept anything as the second argument called `init_arg`. As the name suggest, this argument gets passed to the `init/1` callback.
+  - Accept an optional third argument with advanced options for running the process that we wont' cover now.
 
 Starting a server by calling `GenServer.start/3` or `GenServer.start_link/3` will invoke the `init/1` callback in a blocking way. The return value of `init/1` dictates if the server can be started successfully.
 
 The `init/1` callback usually returns one of those values:
-- `{:ok, state}`. The server will start its receive loop using `state` as its initial state. `state` can be of any type.
-- `{:stop, reason}`. `reason` can be of any type. The server will not start its receive loop. The process will exit with the given reason.
+
+  - `{:ok, state}`. The server will start its receive loop using `state` as its initial state. `state` can be of any type.
+  - `{:stop, reason}`. `reason` can be of any type. The server will not start its receive loop. The process will exit with the given reason.
 
 There are also more advanced possibilities that we won't cover now.
 
@@ -86,20 +88,20 @@ A message that requires a reply can be sent to a server process with `GenServer.
 
 The `handle_call/3` callback is responsible for handling and responding to synchronous messages. It receives three arguments:
 
-1. `message` - the value passed as the second argument to `GenServer.call/2`.
-2. `from` - the `pid` of the process calling `GenServer.call/2`. Most often this argument can be ignored.
-3. `state` - the current state of the server. Remember that its initial value was set in the `init/1` callback.
+1.  `message` - the value passed as the second argument to `GenServer.call/2`.
+2.  `from` - the `pid` of the process calling `GenServer.call/2`. Most often this argument can be ignored.
+3.  `state` - the current state of the server. Remember that its initial value was set in the `init/1` callback.
 
 The `handle_call/3` callback usually returns a 3 tuple of `{:reply, reply, state}`. This means that the second element in the tuple, a `reply` that can be of any type, will be sent back to the caller. The third element in the tuple, `state`, is the new state of the server after handling this message.
 
 There are also more advanced possibilities that we won't cover now.
 
-~~~~exercism/note
+``` exercism/note
 To memorize what this callback does by its name,
 think of it as "calling" somebody on the phone.
 
 If that person is available, you'll receive a reply immediately (synchronously).
-~~~~
+```
 
 #### `handle_cast/2`
 
@@ -111,14 +113,14 @@ The `handle_cast/2` callback usually returns a 2 tuple of `{:noreply, state}`.
 
 There are also more advanced possibilities that we won't cover now.
 
-~~~~exercism/note
+``` exercism/note
 To memorize what this callback does by its name,
 remember that "to cast" also means "to throw".
 
 If you throw a message in a bottle into the sea,
 you don't expect to receive a reply immediately,
 or maybe ever.
-~~~~
+```
 
 #### Should I use `call` or `cast`?
 
@@ -139,7 +141,3 @@ The `GenServer` behaviour provides a catch-all implementation of `handle_info/2`
 The return value of each of the four callbacks described above can be extended by one more tuple element, a timeout. E.g. instead of returning `{:ok, state}` from `init/1`, return `{:ok, state, timeout}`.
 
 The timeout can be used to detect a lack of messages in the mailbox for a specific period. If the server returns a timeout from one of its callbacks, and the specified number of milliseconds have elapsed with no message arriving, `handle_info/2` is called with `:timeout` as the first argument.
-
-[concept-behaviours]: https://exercism.org/tracks/elixir/concepts/behaviours
-[concept-processes]: https://exercism.org/tracks/elixir/concepts/processes
-[concept-links]: https://exercism.org/tracks/elixir/concepts/links

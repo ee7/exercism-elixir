@@ -8,7 +8,7 @@ Functions for handling input and output are provided by the `IO` module.
 
 To write a string to the standard output, use `IO.puts`. `IO.puts` always adds a new line at the end of the string. If you don't want that behavior, use `IO.write` instead. Both functions return the atom `:ok` if they succeed.
 
-```elixir
+``` elixir
 IO.puts("Hi!")
 # > Hi!
 # => :ok
@@ -20,7 +20,7 @@ IO.puts("Hi!")
 
 To read a line from the standard input, use `IO.gets`. `IO.gets` accepts one argument - a string that it will print as a prompt for the input. `IO.gets` doesn't add a new line after the prompt, include it yourself if you need it.
 
-```elixir
+``` elixir
 IO.gets("What's your name?\n")
 # > What's your name?
 # < Mary
